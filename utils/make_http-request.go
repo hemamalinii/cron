@@ -16,7 +16,6 @@ func MakeHTTPRequest[T any](fullUrl string, httpMethod string, headers map[strin
 		return responseType, err
 	}
 
-	// For GET requests, append query parameters
 	if httpMethod == "GET" {
 		q := u.Query()
 		for k, v := range queryParameters {
@@ -38,7 +37,7 @@ func MakeHTTPRequest[T any](fullUrl string, httpMethod string, headers map[strin
 	if err != nil {
 		return responseType, err
 	}
-	defer res.Body.Close() // Defer after receiving response
+	defer res.Body.Close()
 
 	if res == nil {
 		return responseType, fmt.Errorf("error: calling %s returned empty response", u.String())
